@@ -9,10 +9,8 @@ exports.CreateProducts = async (req, res , next) => {
     res.status(200).json({message: "Created Products Success",success:true, product});
 }
 
-exports.getAllProducts = async (req, res) => {
-    res.status(200).json({message: "getAllProdusts Controller"});
-}
 
 exports.getAllProducts = async (req, res) => {
-    res.status(200).json({message: "getAllProdusts Controller"})
+    const product = await products.find();
+    res.status(200).json({message: "getAllProdusts Controller",success:true, product,code:200});
 }
