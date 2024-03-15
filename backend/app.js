@@ -14,7 +14,7 @@ app.use("/api/v1",products);
 
 
 
-console.log(app.get('/api/v1/products')); ;
+// console.log(app.get('/api/v1/products')); ;
 
 
 
