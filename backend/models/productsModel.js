@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 // Create product schema
 const productSchema = new mongoose.Schema({
     name: {
@@ -12,7 +11,7 @@ const productSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: [true, 'Please enter product price'],
-        maxLength: [5, 'Product name cannot exceed 5 characters'],
+        maxLength: [5, 'Product price cannot exceed 5 characters'],
         default: 0.0
     },
     description: {
@@ -23,69 +22,66 @@ const productSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
-    images:[{
-        public_id:{
+    images: [{
+        public_id: {
             type: String,
             required: true
         },
-        url:{
+        url: {
             type: String,
             required: true
         }
     }],
-    category:{
+    category: {
         type: String,
         required: [true, 'Please select category for this product'],
-        // enum: {
-        //     values: [
-        //         'Electronics',
-        //         'Cameras',
-        //         'Laptop',
-        //         'Accessories',
-        //         'Headphones',
-        //         'Food',
-        //         'Books',
-        //         'Clothes/Shoes',
-        //         'Beauty/Health',
-        //         'Sports',
-        //         'Outdoor',
-        //         'Home',
-        //         'SuperCars',
-        //     ],
-        //     message: 'Please select correct category for product'
-        // }
     },
-    stock:{
+    stock: {
         type: Number,
         required: [true, 'Please enter product stock'],
-        maxLength: [5, 'Product name cannot exceed 5 characters'],
+        maxLength: [5, 'Product stock cannot exceed 5 characters'],
         default: 0
     },
-    numOfReviews:{
+    numOfReviews: {
         type: Number,
         default: 0
     },
-    reviews:[
-        {
-            name:{
-                type: String,
-                required: true
-            },
-            rating:{
-                type: Number,
-                required: true
-            },
-            comment:{
-                type: String,
-                required: true
-            }
+    reviews: [{
+        name: {
+            type: String,
+            required: true
+        },
+        rating: {
+            type: Number,
+            required: true
+        },
+        comment: {
+            type: String,
+            required: true
         }
-    ],
-    createdAt:{
+    }],
+    createdAt: {
         type: Date,
         default: Date.now
     }
-})
+});
 
+// Add promises to Mongoose operations
+productSchema.pre('save', async function (next) {
+    try {
+        await this.execPopulate(); // If you want to populate fields before saving
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
+productSchema.post('save', function (error, doc, next) {
+    if (error.name === 'MongoError' && error.code === 11000) {
+        next(new Error('Duplicate key error'));
+    } else {
+        next(error);
+    }
+});
 
 module.exports = mongoose.model('Product', productSchema);
