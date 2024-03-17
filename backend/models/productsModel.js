@@ -67,21 +67,21 @@ const productSchema = new mongoose.Schema({
 });
 
 // Add promises to Mongoose operations
-productSchema.pre('save', async function (next) {
-    try {
-        await this.execPopulate(); // If you want to populate fields before saving
-        next();
-    } catch (error) {
-        next(error);
-    }
-});
+// productSchema.pre('save', async function (next) {
+//     try {
+//         await this.execPopulate(); // If you want to populate fields before saving
+//         next();
+//     } catch (error) {
+//         next(error);
+//     }
+// });
 
-productSchema.post('save', function (error, doc, next) {
-    if (error.name === 'MongoError' && error.code === 11000) {
-        next(new Error('Duplicate key error'));
-    } else {
-        next(error);
-    }
-});
+// productSchema.post('save', function (error, doc, next) {
+//     if (error.name === 'MongoError' && error.code === 11000) {
+//         next(new Error('Duplicate key error'));
+//     } else {
+//         next(error);
+//     }
+// });
 
 module.exports = mongoose.model('Product', productSchema);
