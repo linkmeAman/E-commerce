@@ -8,9 +8,11 @@ app.use(express.json());
 
 // Routes imports
 const products = require('./routes/productsRoute');
+const users = require('./routes/usersRoute');
 
 
 app.use("/api/v1",products);
+app.use("/api/v2",users);
 // console.log(app.get('/api/v1/products')); ;
 
 

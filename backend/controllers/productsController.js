@@ -30,7 +30,7 @@ exports.getAllProducts = AsyncErrors(async (req, res) => {
   return res
     .status(200)
     .json({
-      message: "getAllProdusts Controller",
+      message: "Fetch All Products ",
       success: true,
       product,
       code: 200,
