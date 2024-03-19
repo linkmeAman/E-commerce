@@ -58,4 +58,9 @@ userSchema.methods.getJWTTOKEN = function(){
 }
 
 
+// Comparing password
+userSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcryyptjs.compare(enteredPassword, this.password);
+}
+
 module.exports = mongoose.model("User", userSchema);
