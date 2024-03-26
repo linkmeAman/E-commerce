@@ -25,27 +25,69 @@ exports.registerUsers = AsyncErrors(async (req, res, next) => {
     sendToken(user, 201, res);
 })
 
-
+//NOTE - Get All Users (AdminOnly)
 exports.getAllUsers = AsyncErrors(async (req, res) => {
     // this is the number of products to seen
-    const usersPerPage = 5;
-
+    const allusers = await users.find();
     const userCount = await users.countDocuments();
-
-
-    const apiFeature = await apiFeatures(users.find(), req.query).search().filter().pagination(usersPerPage);
-
-    const user = await apiFeature.query;
-    return res
-    .status(200)
-    .json({
+    console.log(allusers)
+    res.status(200).json({
       message: "Fetch All Products ",
       success: true,
-      product,
-      code: 200,
-      user,
+      allusers,
+      "Users Count": userCount
     });
 })
+
+//NOTE - Get Single User (AdminOnly)
+
+exports.getSingleUser = AsyncErrors(async (req, res) => {
+
+    const singleUser = await users.findById(req.params.id);
+
+    if(!singleUser){
+        return new ErrorHandler("User not found",404)
+        //return res.status(404).json({message: "User not found",success:false});
+    }
+    res.status(200).json({
+      message: "Fetch Single User ",
+      success: true,
+      singleUser
+    });
+})
+
+
+//NOTE - Get User By Name (adminOnly)
+
+// exports.getUserByName = AsyncErrors(async (req, res) => {
+
+//     // this is the number of products to seen
+//     const productsPerPage = 5;
+
+//     try {
+//         // Use the regex in the MongoDB query to find possible users
+//         const possibleUsers = new apiFeatures(products.find(), req.query)
+//         .search()
+//         .pagination(productsPerPage);
+
+//         if (possibleUsers.length === 0) {
+//             throw new ErrorHandler("No users found", 404);
+//         }
+
+//         res.status(200).json({
+//             message: "Fetch Possible Users",
+//             success: true,
+//             possibleUsers
+//         });
+//     } catch (err) {
+//         // Handle errors
+//         console.error(err);
+//         return res.status(err.statusCode || 500).json({
+//             message: err.message || "Internal Server Error",
+//             success: false
+//         });
+//     }
+// });
 
 
 exports.loginUsers = AsyncErrors(async (req, res, next) => {
