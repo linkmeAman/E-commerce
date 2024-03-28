@@ -121,8 +121,6 @@ exports.loginUsers = AsyncErrors(async (req, res, next) => {
 // Update User Profile
 
 exports.updateUserProfile = AsyncErrors(async (req, res, next) => {
-    console.log(req.body);
-    console.log(req.user);
 
     const newUserData = {
         name: req.body.name,
@@ -253,3 +251,49 @@ exports.updateUserPassword = AsyncErrors(async function(req, res, next){
     await user.save();
     sendToken(user, 200, res);
 })
+
+// Update User Role (Admin)
+
+exports.updateUserRole = AsyncErrors(async (req, res, next) => {
+    console.log(req.body);
+    // console.log(req.user);
+
+    const newUserData = {
+        // name: req.body.name,
+        // email: req.body.email,
+        role: req.body.role
+    }
+
+    const user = await users.findByIdAndUpdate(req.params.id, newUserData, {
+        new:true,
+        runValidators: true,
+        useFindAndModify: false
+    });
+    // console.log(user);
+
+
+   await user.save();
+   res.status(200).json({
+       success: true,
+       user,
+       message: "User Updated Successfully"
+   })
+})
+
+// Delete User Role (Admin)
+
+exports.deleteUser = AsyncErrors(async (req, res, next) => {
+    const user = await users.findById(req.params.id);
+    console.log("USER : ", user);
+    // Will be deleting Cloudinary object
+    if (!user) {
+        return next(new ErrorHandler(`User not found ${req.params.id}`, 404));
+    }
+
+    await user.deleteOne();
+    res.status  (200).json({
+        success: true,
+        user,
+        message: "User Deleted Successfully"
+    });
+});
