@@ -2,7 +2,7 @@ const app = require('./app');
 
 const dotenv = require('dotenv');
 const dbConnect = require('./config/db');
-
+const PORT = process.env.PORT || 5000
 dotenv.config({path:"backend/config/config.env"});
 // handling uncaught exception
 process.on('uncaughtException',(err) =>{
@@ -14,8 +14,8 @@ process.on('uncaughtException',(err) =>{
 
 dbConnect();
 
-const server = app.listen(process.env.PORT, () => {
-    console.log(`listening on port  http://localhost:${process.env.PORT}`);
+const server = app.listen(PORT, () => {
+    console.log(`listening on port  http://localhost:${PORT}`);
 })
 // console.log(dkdsk)
 
