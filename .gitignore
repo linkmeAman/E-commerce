@@ -6,3 +6,4 @@ backend/config/config.env
 //ANCHOR - 
 
 // 
+node_modules
