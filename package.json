@@ -21,7 +21,11 @@
     "mongoose": "^8.2.1",
     "nodemailer": "^6.9.12",
     "nodemon": "^3.1.0",
+    "prop-types": "^15.8.1",
     "validator": "^13.11.0",
     "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "@types/webfontloader": "^1.6.38"
   }
 }
