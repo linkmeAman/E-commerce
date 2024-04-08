@@ -1,0 +1,6 @@
+.productCard  img {
+    /* aspect-ratio: 2/2; */
+    width: 100%;
+    object-fit: contain;
+    mix-blend-mode: color-burn;
+}

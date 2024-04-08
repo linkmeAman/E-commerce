@@ -12,11 +12,13 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "@redux-devtools/extension": "^3.3.0",
+    "@reduxjs/toolkit": "^2.2.3",
     "axios": "^1.6.8",
     "overlay-navbar": "^1.2.3",
     "react": "^18.2.0",
     "react-alert-template-basic": "^1.0.2",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-helmet-async": "^2.0.4",
     "react-icons": "^5.0.1",
     "react-rating-stars-component": "^2.2.0",
@@ -26,15 +28,15 @@
     "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.73",
-    "@types/react-dom": "^18.2.23",
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
+    "@types/react": "^18.2.74",
+    "@types/react-dom": "^18.2.24",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-react-swc": "^3.6.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "typescript": "^5.4.3",
-    "vite": "^5.2.7"
+    "typescript": "^5.4.4",
+    "vite": "^5.2.8"
   }
 }
